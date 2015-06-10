@@ -40,6 +40,16 @@ $enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->count(), 6 ,"viewr
         
           <div style="clear: both; height: 100px;"></div>
         <div class="container container-fluid">
+            <section>
+            <div class="container">
+                <div class="row underline">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Listado de incidencias</h2>
+                        <h3 class="section-subheading text-muted"></h3>
+                    </div>
+                </div>
+            </div>
+        </section>
             <div></div>
             <div class="row">
                 <div class="col-md-12">

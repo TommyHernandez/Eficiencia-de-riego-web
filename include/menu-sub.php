@@ -19,11 +19,10 @@
                         <li><a href="../index.php">Sobre</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Graficas <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Olivos por sector</a></li>
-                                <li><a href="#">Litros por sector</a></li>
-                                <li><a href="#">Olivos por zona  </a></li>
-                                <li><a href="#">Eficiencia por sector</a></li>
+                           <ul class="dropdown-menu" role="menu">
+                                <li><a href="../index.php#oliv">Olivos por sector</a></li>
+                                <li><a href="../index.php#eficiancia">Eficiencia</a></li>
+                                <li><a href="../index.php#litros">Litros por zector </a></li>                                
                             </ul>
                         </li>
                         <li class="dropdown">

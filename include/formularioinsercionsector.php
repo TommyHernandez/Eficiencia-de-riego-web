@@ -19,8 +19,8 @@ if ($ajax === FALSE) {
     <div class="form-group">
         <label for="id">Metodo</label>
         <select name="riego" class="form-control">
-            <option selected="selected">Gravedad</option>
-            <option>Rebombeo</option>
+            <option selected="selected" value="gravedad">Gravedad</option>
+            <option value="rebombeo">Rebombeo</option>
         </select>
     </div>
 </form>

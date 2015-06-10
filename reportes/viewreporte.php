@@ -42,7 +42,17 @@ $usuario = $modelouser->get($objeto->getUsuario());
     <body>
         <?php include '../include/menu-sub.php'; ?>
         <div style="clear: both; height: 100px;"></div>
-        <div class="container container-fluid">
+        <section>
+            <div class="container">
+                <div class="row underline">
+                    <div class="col-lg-12 text-center">
+                        <h2 class="section-heading">Reporte Sector #<?php echo $objeto->getId(); ?></h2>
+                        <h3 class="section-subheading text-muted"></h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container container-fluid light-gray">           
             <div class="row">
                 <div class="animated slideInUp col-md-4">
                     <div>
@@ -71,11 +81,11 @@ $usuario = $modelouser->get($objeto->getUsuario());
 
                 </div>
             </div>
-
-            <div class="row">
-                <div id="mapa" class="animated slideInUp"></div> 
-            </div>
         </div>
+        <div class="row">
+            <div id="mapa" class="animated slideInUp"></div> 
+        </div>
+        <?php include '../include/footer.php'; ?>
     </body>
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -107,12 +117,12 @@ $usuario = $modelouser->get($objeto->getUsuario());
                 fillColor: '#00786c',
                 fillOpacity: 0.35,
                 map: map,
-                center: new google.maps.LatLng(lat,long),
+                center: new google.maps.LatLng(lat, long),
                 radius: 3000
             };
 //create circle
             area = new google.maps.Circle(circleOptions);
-            area.bind(map,marker);
+            area.bind(map, marker);
         })
     </script>
 </html>

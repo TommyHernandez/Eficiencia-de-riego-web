@@ -93,7 +93,30 @@ class ModeloLectura {
         $r = substr($r, 0, -1) . "]";
         return $r;
     }
-    
+
+    function getJsonSectorEficiencia($parametros = array()) {
+        $sql = "select sector, eficiencia from $this->tabla ";
+        $this->bd->setConsulta($sql, $parametros);
+        $resp = "{ ";
+        while ($fila = $this->bd->getFila()) {
+            $resp.='"' . $fila[0] . '":' . json_encode(htmlspecialchars_decode($fila[1])) . ',';
+        }
+        $resp = substr($resp, 0, -1) . "}";
+        return $resp;
+    }
+
+    function getJsonSectorLitros($parametros = array()) {
+        $sql = "SELECT sector, sum(contadorF-contadorI) FROM `Lecturas` group by sector ";
+
+        $this->bd->setConsulta($sql, $parametros);
+        $resp = "{ ";
+        while ($fila = $this->bd->getFila()) {
+            $resp.='"' . $fila[0] . '":' . json_encode(htmlspecialchars_decode($fila[1])) . ',';
+        }
+        $resp = substr($resp, 0, -1) . "}";
+        return $resp;
+    }
+
     function deleteID($id) {
         $sql = "delete from $this->tabla where id = :id";
         $parametros["id"] = $id;

@@ -109,6 +109,32 @@ class ModeloSector {
         return $r;
     }
 
+    function getJsonOlivosZona() {
+        $sql = "SELECT contador, sum(olivos) FROM `Sectores` group by contador";
+        $parametros = array();
+        $this->bd->setConsulta($sql, $parametros);
+        $resp = "{ ";
+        while ($fila = $this->bd->getFila()) {
+            $resp.='"' . $fila[0] . '":' . json_encode(htmlspecialchars_decode($fila[1])) . ',';
+        }
+        $resp = substr($resp, 0, -1) . "}";
+        return $resp;
+    }
+
+    function getJsonSectorOlivos($condicion = "1=1", $parametros = array(), $orderby = "1") {
+
+        $sql = "select id,olivos from "
+                . $this->tabla .
+                " where $condicion order by $orderby ";
+        $this->bd->setConsulta($sql, $parametros);
+        $resp = "{ ";
+        while ($fila = $this->bd->getFila()) {
+            $resp.='"' . $fila[0] . '":' . json_encode(htmlspecialchars_decode($fila[1])) . ',';
+        }
+        $resp = substr($resp, 0, -1) . "}";
+        return $resp;
+    }
+
     function count($condicion = "1=1", $parametros = array()) {
         $sql = "select count(*) from $this->tabla where $condicion";
         $r = $this->bd->setConsulta($sql, $parametros);
@@ -117,6 +143,16 @@ class ModeloSector {
             return $f[0];
         }
         return -1;
+    }
+
+    function deleteID($id) {
+        $sql = "delete from $this->tabla where id = :id";
+        $parametros["id"] = $id;
+        $r = $this->bd->setConsulta($sql, $parametros);
+        if (!$r) {
+            return -1;
+        }
+        return $this->bd->getNumeroFilas();
     }
 
 }

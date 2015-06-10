@@ -10,6 +10,6 @@ class Configuracion {
     const PEZARANA = "pez araña";
     const ORIGENGMAIL = "correo@gmail.com";
     const CLAVEGMAIL = "*******";
-    const RPP = 4;
+    const RPP = 8;
     const TIMEOUT = 1800;
 }

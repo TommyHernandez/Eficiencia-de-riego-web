@@ -25,9 +25,11 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
         <!-- librerias de google -->
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>  
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <!-- toastadas -->
+        <link type="text/css" rel="stylesheet" href="css/vendor/toastr.min.css" />
+        <script src="js/vendor/toastr.min.js"></script>
     </head>
     <body>
         <!-- Fixed navbar -->
@@ -49,10 +51,9 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Graficas <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Olivos por sector</a></li>
-                                <li><a href="#">Litros por sector</a></li>
-                                <li><a href="#">Olivos por zona  </a></li>
-                                <li><a href="#">Eficiencia por sector</a></li>
+                                <li><a href="#oliv">Olivos por sector</a></li>
+                                <li><a href="#eficiancia">Eficiencia</a></li>
+                                <li><a href="#litros">Litros por zector </a></li>                                
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -89,7 +90,7 @@
         </section>
         <!-- = GRAFICA 1 == -->
         <section id="">
-            <div class="container"  class="seccion">
+            <div id="oliv" class="container"  class="seccion">
                 <div class="row">
                     <div>
                         <h2>Olivos por sector</h2>
@@ -103,13 +104,13 @@
                         <form>
                             <div class="form-group">
                                 <label for="filtroolivo">Filtar por</label>
-                                <select name="filtroolivo" class="form-control">
-                                    <option selected="selected">Sector</option>
-                                    <option>Zona</option>
+                                <select id="filtroolivo" name="filtroolivo" class="form-control">
+                                    <option selected="selected" value="sector">Sector</option>
+                                    <option value="zona">Zona</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-default"> Filrar</button>
+                                <button id="filtro-olivos" class="btn btn-default"> Filrar</button>
                             </div>
                         </form>
                     </div>
@@ -117,42 +118,10 @@
             </div> 
         </section>
         <script>
-            google.load("visualization", "1", {packages: ["corechart"]});
-
-            google.setOnLoadCallback(drawChart);
-            function drawChart() {
-                var data = google.visualization.arrayToDataTable([
-                    ["Sector", "Olivos", {role: "style"}],
-                    ["s1", 12725, "#b87333"],
-                    ["s2", 16127, "silver"],
-                    ["s3", 10444, "gold"],
-                    ["s4", 10200, "color: #e5e4e2"],
-                    ["s5", 7695, "blue"],
-                    ["s6", 12751, "color: #e5e4e2"],
-                    ["s7", 13224, "color: #e5e4e2"]
-                ]);
-
-                var view = new google.visualization.DataView(data);
-                view.setColumns([0, 1,
-                    {calc: "stringify",
-                        sourceColumn: 1,
-                        type: "string",
-                        role: "annotation"},
-                    2]);
-
-                var options = {
-                    title: "Olivos Por Sector",
-                    width: 600,
-                    height: 400,
-                    bar: {groupWidth: "95%"},
-                    legend: {position: "none"},
-                };
-                var chart = new google.visualization.ColumnChart(document.getElementById("olv-sec"));
-                chart.draw(view, options);
-            }
+           
         </script>
         <!-- = GRAFICA 2 == -->
-        <section id="" class="light-gray seccion">
+        <section id="eficiencia" class="light-gray seccion">
             <div class="container">
                 <div class="row">
                     <div>
@@ -221,7 +190,7 @@
             }
         </script>
         <!-- = GRAFICA 3 == -->
-        <section id="" class="seccion seccion">
+        <section id="litros" class="seccion seccion">
             <div class="container">
                 <div class="row">
                     <div>
@@ -236,19 +205,7 @@
                 </div>
             </div>
         </section>
-        <!-- = GRAFICA 4 == -->
-        <section id="" class="light-gray">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-
-                    </div>
-                    <div class="col-md-8">
-
-                    </div>
-                </div>
-            </div>
-        </section>
+        
         <!-- == Fin Secciones == --> 
         <script src="js/frontend.js"></script>
     </body>
