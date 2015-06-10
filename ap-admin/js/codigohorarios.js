@@ -1,26 +1,28 @@
-
 window.addEventListener("load", function () {
     var pagina = 0;
     agregarEventoVerInsertar();
+
     function cargarPagina(pagina) {
         pagina = pagina;
         $.ajax({
-            url: "ajaxSectorselect.php?pagina=" + pagina,
+            url: "ajaxSelecthorario.php?pagina=" + pagina,
             success: function (result) {
                 destruirTabla();
+
                 construirTabla(result);
                 var enlaces = document.getElementsByClassName("enlace");
                 for (var i = 0; i < enlaces.length; i++)
                     agregarEvento(enlaces[i]);
             },
             error: function () {
-                
+                alert("error");
             }
         });
         agregarEventoVerInsertar();
 
     }
-function confirmar(evento, mensaje) {
+    /* ====  DIALOGOS de CONFIRMACION  ====  */
+    function confirmar(evento, mensaje) {
         evento.preventDefault(); //prevenimos la accion por defecto
         //capturamos el dialogo modal que esta definido en un Div
         $("#contenidomodal").html("¿Borrar " + mensaje + "?"); //asignamos un mensaje
@@ -30,7 +32,7 @@ function confirmar(evento, mensaje) {
             $("#dialogomodal").modal('hide');
             //realizamos una peticion AJAX
             $.ajax({
-                url: "ajaxSectordelete.php?id=" + mensaje + "&pagina=" + pagina,
+                url: "ajaxDeleteHorario.php?id=" + mensaje + "&pagina=" + pagina,
                 success: function (result) {
                     if (result.estado) {
                         tostada("Se ha borrado a " + mensaje + " correctametne");
@@ -51,7 +53,9 @@ function confirmar(evento, mensaje) {
             $("#dialogomodal").modal('hide');
         });
         $('#dialogomodal').modal('show');
-    };
+    }
+    ;
+
     /*=== EVENTOS  ===*/
     function agregarEvento(elemento) {
         var datahref = elemento.getAttribute("data-href");
@@ -59,10 +63,10 @@ function confirmar(evento, mensaje) {
             cargarPagina(datahref)
         };
     }
-    ;
+  
 
     function agregarEventoVerInsertar() {
-        var elemento = document.getElementById("addbtnsectores");
+        var elemento = document.getElementById("addbtnhorarioss");
         elemento.addEventListener("click", function () {
             $("#btisi").unbind("click");
             $("#btisi").on("click", function () {
@@ -72,34 +76,91 @@ function confirmar(evento, mensaje) {
                 var nombre = document.getElementById('nombre').value;
                 var email = document.getElementById('email').value;
                  var root = $("#isroot").val();
-                var cadena ;
+                var cadena = "login=" + login + "&clave=" + clave + "&email=" + email + "&nombre=" + nombre + "&root="+root;
+
                 // LLamada AJAX para la insercion
                 $.ajax({
-                    url: "ajaxSectorinsert.php?" + cadena,
+                    url: "ajaxinsert.php?" + cadena,
                     success: function (result) {
                         if (result.estado) {
-                            tostada("Se ha añadido correctametne");
+                            tostada("Se ha Añadido correctametne");
                         } else {
-                            tostada("No se ha podido insertar", 2);
+                            tostada("No se ha podido insertar", 3);
                         }
                     },
                     error: function () {
-                        tostada("Ajax ha tenido un error interno", 3);
+                        tostada("AJAX FALLO", 3);
                     }
                 });
 
-                $("#dialogomodalinsertarS").modal('hide');
+                $("#dialogomodalinsertarH").modal('hide');
             });
             $("#btino").unbind("click");
             $("#btino").on("click", function (e) {
                 //usando la tostada para dar un aviso
                 tostada("Cacelando!", 2);
-                $("#dialogomodalinsertarS").modal('hide');
+                $("#dialogomodalinsertarH").modal('hide');
             });
-            $('#dialogomodalinsertarS').modal('show');
+            $('#dialogomodalinsertarH').modal('show');
         }, false);
     }
- 
+    /**
+     *
+     * @returns {undefined}
+     */
+    function verEditar() {
+        //Capturamos todos los elementos del DOM
+        var id = this.getAttribute('data-editar');
+        // LLamada AJAX para la insercion
+        $.ajax({
+            url: "ajaxget.php?id=" + id,
+            success: function (result) {
+                var login = document.getElementById('login').value = result.login;
+                var clave = document.getElementById('clave').value = "";
+                var nombre = document.getElementById('nombre').value = result.nombre;
+                var email = document.getElementById('email').value = result.email;
+
+            },
+            error: function () {
+                tostada("AJAX FALLO al procesar al usuario", 3);
+            }
+        });
+        /* ==== BOTON SI EN CASO DE QUE SE QUIERA EDITAR ====*/
+        $("#btisi").unbind("click");
+        $("#btisi").on("click", function () {
+            //Capturamos todos los elementos del DOM
+            var loginnew = document.getElementById('login').value;
+            var clave = document.getElementById('clave').value;
+            var nombre = document.getElementById('nombre').value;
+            var email = document.getElementById('email').value;
+            var root = $("#isroot").val();
+            var cadena = "login=" + loginnew + "&clave=" + clave + "&nombre=" + nombre + "&email=" + email + "&isroot="+root+"&id=" + id;
+            // LLamada AJAX para la edicion
+            $.ajax({
+                url: "ajaxedit.php?" + cadena,
+                success: function (result) {
+                    if (result.estado) {
+                        tostada("Se ha Editado Correctametne");
+                    } else {
+                        tostada("No se ha podido insertar", 3);
+                    }
+                },
+                error: function () {
+                    tostada("AJAX FALLO", 3);
+                }
+            });
+            $("#dialogomodalinsertar").modal('hide');
+        });
+        $("#btino").unbind("click");
+        $("#btino").on("click", function (e) {
+            //usando la tostada para dar un aviso
+            tostada("Cacelando!", 2);
+            $("#dialogomodalinsertar").modal('hide');
+        });
+        $('#dialogomodalinsertar').modal('show');
+
+    }
+
     function destruirTabla() {
         var div = document.getElementById("divajax");
         while (div.hasChildNodes()) {
@@ -118,14 +179,14 @@ function confirmar(evento, mensaje) {
         }
     }
 
-//    function definirEditar(clase) {
-//        var elementos, i;
-//        elementos = document.getElementsByClassName(clase);
-//        for (i = 0; i < elementos.length; i = i + 1) {
-//            mensaje = elementos[i].getAttribute("data-editar");
-//            elementos[i].onclick = verEditar;
-//        }
-//    }
+    function definirEditar(clase) {
+        var elementos, i;
+        elementos = document.getElementsByClassName(clase);
+        for (i = 0; i < elementos.length; i = i + 1) {
+            mensaje = elementos[i].getAttribute("data-editar");
+            elementos[i].onclick = verEditar;
+        }
+    }
     /*=== DIALOGOS  ===*/
     function tostada(mensaje, tipo) {
         toastr.options = {
@@ -217,11 +278,10 @@ function confirmar(evento, mensaje) {
         var div = document.getElementById("divajax");
         div.appendChild(tabla);
         definirBorrar("enlace_borrar");
-       // definirEditar("enlace_editar");
+        definirEditar("enlace_editar");
     }
 
-    $("#lstbtnsectores").on("click", function () {
+    $("#lstbtnhorarios").on("click", function () {
         cargarPagina(0);
     });
 });
-

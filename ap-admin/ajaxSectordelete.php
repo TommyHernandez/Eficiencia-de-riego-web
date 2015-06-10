@@ -1,8 +1,14 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+header('Content-Type: application/json');
+require '../require/comun.php';
+$id = Leer::get("id");
+$pagina = Leer::get("pagina");
+$bd = new BaseDatos();
+$modelo = new ModeloSector($bd);
+$r=$modelo->deleteID($id);
+if ($r) {
+    echo "{";
+    echo '"estado":true, "pagina":'.$pagina."}";
+} else{
+   
+}

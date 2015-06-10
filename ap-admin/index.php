@@ -4,8 +4,6 @@ $acc = 1;
 if (isset($_GET["acc"])) {
     $acc = $_GET["acc"];
 }
-//if($sesion->isAdminLogin()){}
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -59,3 +57,10 @@ if (isset($_GET["acc"])) {
         </div> <!-- /container -->
     </body>
 </html>
+<?php
+if($sesion->isAdminLogin()){
+    header("Location: panel.php");
+}else{
+    
+}
+?>

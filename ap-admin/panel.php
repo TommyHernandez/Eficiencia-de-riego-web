@@ -86,92 +86,24 @@ $sesion->administrador("../index.php");
                             </div>
 
                         </li>
+                          <li>
+                            <a class="" type="button" data-toggle="collapse" data-target="#li-horarios" aria-expanded="false" aria-controls="li-horarios">
+                                Horarios
+                            </a>
+                            <div class="collapse" id="li-horarios">
+                                <div class="well">
+                                    <ul>
+                                        <li><a id="lstbtnhorarios" href="#">Listar</a></li>
+                                        <li><a id="addbtnhorarioss" href="#">Añadir</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
                         <li><a id="btnlecturas" href="#">Lecturas</a></li>
+                        <li><a href="../reportes/viewreportes.php">Reportes</a></li>
                     </ul>
                 </div>
-                <!-- Definbimos el dialogo modal que se mostrará para la inserción y la edición de usuarios -->
-                <div id="dialogomodalinsertar" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Usuarios</h4>
-                            </div>
-                            <!-- dialog body -->
-                            <div class="modal-body">
-                                <?php
-                                include '../include/formulrioinsercionusuario.php';
-                                ?>
-                            </div>
-                            <!-- dialog buttons -->
-                            <div class="modal-footer">
-                                <button type="button" id="btisi" class="btn btn-success">Enviar</button>
-                                <button type="button" id="btino" class="btn btn-warning">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                    </div><!-- ./modal -->
-                    <div id="dialogomodal" class="modal fade">
-                     <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Eliminar Usuario</h4>
-                            </div>
-                                <div class="modal-body">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <span id="contenidomodal">Contenido modal</span>
-                                </div>
-                                <!-- dialog buttons -->
-                                <div class="modal-footer">
-                                    <button type="button" id="btsi" class="btn btn-success">Aceptar</button>
-                                    <button type="button" id="btno" class="btn btn-warning">Cancelar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- ./modal2 -->
-                    
-                       <div id="dialogomodalinsertarS" class="modal fade">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Usuarios</h4>
-                            </div>
-                            <!-- dialog body -->
-                            <div class="modal-body">
-                                <?php
-                                include '../include/formulrioinsercionsector.php';
-                                ?>
-                            </div>
-                            <!-- dialog buttons -->
-                            <div class="modal-footer">
-                                <button type="button" id="btisi" class="btn btn-success">Enviar</button>
-                                <button type="button" id="btino" class="btn btn-warning">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                    </div><!-- ./modal Sectores -->
-                    
-                     <div id="modaldeleteSector" class="modal fade">
-                     <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Eliminar Usuario</h4>
-                            </div>
-                                <div class="modal-body">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <span id="contenidomodal">Contenido modal</span>
-                                </div>
-                                <!-- dialog buttons -->
-                                <div class="modal-footer">
-                                    <button type="button" id="btsi" class="btn btn-success">Aceptar</button>
-                                    <button type="button" id="btno" class="btn btn-warning">Cancelar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- ./modal 2 Sectores -->
+               
                 
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
@@ -180,6 +112,8 @@ $sesion->administrador("../index.php");
                 </div>
             </div>
         </div>
+        <!-- == Añadimos todos los modales == -->        
+        <?php include '../include/modales.php'; ?>
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
@@ -190,6 +124,7 @@ $sesion->administrador("../index.php");
         <script src="js/codigo-lectura.js"></script>
         <script src="../js/vendor/bootstrap.min.js"></script>
         <script src="../js/vendor/toastr.min.js"></script>
+        <script src="js/codigohorarios.js"></script>
 
     </body>
 </html>
