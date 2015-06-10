@@ -91,10 +91,10 @@ class SesionSingleton {
      * Comprueba si el usuario es root y lo redirige a la URL dada
      * @param String destino
      */
-     function isAdminLogin($destino="panel.php"){
+     function isAdminLogin(){
         $usuario = $this->getUsuario();
         if($usuario->getIsroot()){
-            $this->redirigir ($destino);
+            return true;
         }else{
             return false;
         }
