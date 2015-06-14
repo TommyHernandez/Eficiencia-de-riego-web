@@ -46,7 +46,7 @@ $usuario = $modelouser->get($objeto->getUsuario());
             <div class="container">
                 <div class="row underline">
                     <div class="col-lg-12 text-center">
-                        <h2 class="section-heading">Reporte Sector #<?php echo $objeto->getId(); ?></h2>
+                        <h2 class="section-heading">Reporte Nº #<?php echo $objeto->getId(); ?></h2>
                         <h3 class="section-subheading text-muted"></h3>
                     </div>
                 </div>
@@ -81,6 +81,14 @@ $usuario = $modelouser->get($objeto->getUsuario());
 
                 </div>
             </div>
+            <?php if ($sesion->isAdminLogin()){ ?>
+            <div class="row formulario-delete">
+                <form>
+                    <input type="hidden" name="id" value="<?php $objeto->getId(); ?>">
+                    <input type="submit" id="borrar" class="btn btn-warning" value="Eliminar el Reporte" />
+                </form>
+            </div>
+            <?php }?>
         </div>
         <div class="row">
             <div id="mapa" class="animated slideInUp"></div> 

@@ -19,12 +19,10 @@ switch ($tabla) {
         break;
     case "lecturas":
         $modelo = new ModeloLectura($bd);
-
-        if (!$litros) {
-            echo $modelo->getJsonSectorEficiencia();
-        } else {
-
+        if ($litros) {
             echo $modelo->getJsonSectorLitros();
+        } else {
+            echo $modelo->getJsonSectorEficiencia();
         }
         break;
     case "horario":

@@ -45,7 +45,7 @@ $sesion->administrador("../index.php");
                         <li><a href="../index.php">inicio</a></li>
                         <li><a href="#">Settings</a></li>
                         <li><a href="#">Perfil</a></li>
-                        <li><a href="#">Ayuda</a></li>
+                        <li><a href="../usuario/phplogout.php">Log out</a></li>
                     </ul>
                     <form class="navbar-form navbar-right">
                         <input type="text" class="form-control" placeholder="Search...">

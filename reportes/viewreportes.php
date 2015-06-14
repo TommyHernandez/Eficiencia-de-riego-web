@@ -3,13 +3,14 @@ require_once '../require/comun.php';
 $bd = new BaseDatos();
 $modelo = new ModeloReportes($bd);
 $pagina = Leer::get("pagina");
+$resutl = Leer::get("result");
 if (isset($pagina)) {
     $pagina = Leer::get("pagina");
-}else{
+} else {
     $pagina = 0;
 }
 $filas = $modelo->getList($pagina, 6);
-$enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->count(), 6 ,"viewreportes.php");
+$enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->count(), 6, "viewreportes.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,6 +30,7 @@ $enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->count(), 6 ,"viewr
 
         <!-- Custom styles for this template -->
         <link href="../css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/vendor/toastr.min.css" type="text/css" />
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -36,20 +38,35 @@ $enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->count(), 6 ,"viewr
         <![endif]-->          
     </head>
     <body>
-        <?php include '../include/menu-sub.php'; ;?>
-        
-          <div style="clear: both; height: 100px;"></div>
+        <?php include '../include/menu-sub.php';
+        ;
+        ?>
+
+        <div style="clear: both; height: 100px;"></div>
+<?php if ($resutl == 1) { ?>
+            <script>
+                //mostramos la tostada en caso de que el borrado sea correcto
+                toastr.success('Have fun storming the castle!', 'Miracle Max Says');
+
+            </script>
+<?php } else if ($resutl == -1) { ?>
+            <script>
+                //Mostramos esta tostada en caso de que el borrado no sea correcto
+                toastr.error('I do not think that word means what you think it means.', 'Inconceivable!')
+
+            </script>
+<?php } ?>
         <div class="container container-fluid">
             <section>
-            <div class="container">
-                <div class="row underline">
-                    <div class="col-lg-12 text-center">
-                        <h2 class="section-heading">Listado de incidencias</h2>
-                        <h3 class="section-subheading text-muted"></h3>
+                <div class="container">
+                    <div class="row underline">
+                        <div class="col-lg-12 text-center">
+                            <h2 class="section-heading">Listado de incidencias</h2>
+                            <h3 class="section-subheading text-muted"></h3>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
             <div></div>
             <div class="row">
                 <div class="col-md-12">
@@ -64,7 +81,7 @@ $enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->count(), 6 ,"viewr
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($filas as $indice => $objeto) { ?>
+<?php foreach ($filas as $indice => $objeto) { ?>
                                 <tr>
                                     <td><?php echo $objeto->getId(); ?> </td>
                                     <td><?php echo $objeto->getTitulo(); ?> </td>
@@ -72,7 +89,7 @@ $enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->count(), 6 ,"viewr
                                     <td><?php echo $objeto->getEstado(); ?> </td>
                                     <td><a href="viewreporte.php?id=<?php echo $objeto->getId(); ?>"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a></td>
                                 </tr>
-                            <?php } ?>
+<?php } ?>
                             <tr>
                                 <th colspan="12">
                                     <?php echo $enlaces["inicio"]; ?>
@@ -83,7 +100,7 @@ $enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->count(), 6 ,"viewr
                                     <?php echo $enlaces["cuarto"]; ?>
                                     <?php echo $enlaces["quinto"]; ?>
                                     <?php echo $enlaces["siguiente"]; ?>
-                                    <?php echo $enlaces["ultimo"]; ?>
+<?php echo $enlaces["ultimo"]; ?>
                                 </th>
                             </tr>
                         </tbody>
@@ -99,5 +116,6 @@ $enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->count(), 6 ,"viewr
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="../js/vendor/bootstrap.min.js"></script>
+    <script src="../js/vendor/toastr.min.js"></script>
 
 </html>

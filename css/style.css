@@ -63,29 +63,51 @@ nav a:hover {
     min-height: 400px;
 }
 section {
-  padding: 100px 0;
+    padding: 100px 0;
 }
 .text-center {
-  text-align: center;
+    text-align: center;
 }
-    h2.section-heading {
-		font-size: 40px;
-		margin-top: 0;
-		margin-bottom: 15px;
-    }
+h2.section-heading {
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
 .cabecera{
     height: 600px;
-  text-align: center;
-  color: #fff;
-  background-attachment: scroll;
-  background-image: url(../imagenes/pic01.jpg);
-  background-position: center center;
-  background-repeat: none;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  border-bottom: 2px solid #bdbdbd;
+    text-align: center;
+    color: #fff;
+    background-attachment: scroll;
+    background-image: url(../imagenes/pic01.jpg);
+    background-position: center center;
+    background-repeat: none;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    border-bottom: 2px solid #bdbdbd;
 }
 .underline{
     border-bottom: 2px solid #bdbdbd;
+}
+.footer{
+    width: 100%;
+    border-top: 2px solid #bdbdbd;
+    background-color: rgba(48, 209, 253, 0.51) ;
+}
+.subfooter{
+    top:0px;
+    width: 100%;
+    background-color: #30d1fd;
+}
+h5 {
+    font-weight: 500;
+}
+.formulario-delete{
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom:  5px;
+    text-align: right;
+}
+.formulario-delete form{
+    right: 0px;
 }

@@ -1,10 +1,4 @@
 <?php
-require '../clases/require/comun.php';
-$login = Leer::get("login");
-$bd = new BaseDatos();
-$modelolog = new ModeloLog($bd);
-$tipo = "logout";
-        $log = new Log($login,$tipo);
-        $modelolog->add($log);
+require '../require/comun.php';
 $sesion->cerrar();
-header("Location: ../");
+header("Location: ../index.php");

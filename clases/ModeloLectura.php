@@ -95,7 +95,7 @@ class ModeloLectura {
     }
 
     function getJsonSectorEficiencia($parametros = array()) {
-        $sql = "select sector, eficiencia from $this->tabla ";
+        $sql = "select sector, eficiencia from $this->tabla where 1 order by 1 ";
         $this->bd->setConsulta($sql, $parametros);
         $resp = "{ ";
         while ($fila = $this->bd->getFila()) {

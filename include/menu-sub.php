@@ -33,6 +33,11 @@
                             </ul>
                         </li>
                         <li><a href="../reportes/viewreportes.php">Reportes</a></li>
+                        <?php if ($sesion->isAutentificado()) { ?>
+                        <li><a href="../usuario/phplogout.php">Log out</a></li>
+                        <?php } else { ?>
+                            <li><a href="../ap-admin">Login</a></li>
+                            <?php } ?>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
