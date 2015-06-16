@@ -78,7 +78,7 @@ class ModeloLectura {
         return $r;
     }
 
-    function getListJSON2($condicion = "1=1", $parametros = array(), $orderby = "1") {
+    function getListJSONFull($condicion = "1=1", $parametros = array(), $orderby = "1") {
 
         $sql = "select * from "
                 . $this->tabla .
@@ -117,16 +117,6 @@ class ModeloLectura {
         return $resp;
     }
 
-    function deleteID($id) {
-        $sql = "delete from $this->tabla where id = :id";
-        $parametros["id"] = $id;
-        $r = $this->bd->setConsulta($sql, $parametros);
-        if (!$r) {
-            return -1;
-        }
-        return $this->bd->getNumeroFilas();
-    }
-
     function getList($principio = 0, $rpp = 5, $condicion = "1=1", $orderby = 1, $parametros = array()) {
         $list = array();
         $sql = "select * from $this->tabla WHERE $condicion order by $orderby limit $principio, $rpp";
@@ -142,7 +132,7 @@ class ModeloLectura {
             return $list;
         }
     }
-
+    
     function count($condicion = "1=1", $parametros = array()) {
         $sql = "select count(*) from $this->tabla where $condicion";
         $r = $this->bd->setConsulta($sql, $parametros);

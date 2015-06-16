@@ -84,15 +84,14 @@ class ModeloReportes {
         return $r;
     }
 
-    function getListJSON2($condicion = "1=1", $parametros = array(), $orderby = "1") {
-
+    function getListJSONFull($condicion = "1=1", $parametros = array(), $orderby = "1") {
         $sql = "select * from "
                 . $this->tabla .
                 " where $condicion order by $orderby";
         $this->bd->setConsulta($sql, $parametros);
         $r = "[ ";
         while ($fila = $this->bd->getFila()) {
-            $objeto = new Categoria();
+            $objeto = new Reportes();
             $objeto->set($fila);
             $r .= $objeto->getJSON() . ",";
         }
@@ -108,7 +107,7 @@ class ModeloReportes {
             return null;
         } else {
             while ($fila = $this->bd->getFila()) {
-             $objeto = new Reportes();
+                $objeto = new Reportes();
                 $objeto->set($fila);
                 $list[] = $objeto;
             }

@@ -93,11 +93,75 @@ class ModeloSector {
         return $respuesta;
     }
 
+    /**
+     * Devuelve un listado de usuarios formateado en JSON
+     * @param type $condicion
+     * @param type $parametros
+     * @param type $orderby
+     * @return string
+     */
+    function getListJSONFull($condicion = "1=1", $parametros = array(), $orderby = "1") {
+        $pos = $pagina * $rpp;
+        $sql = "select * from "
+                . $this->tabla .
+                " where $condicion order by $orderby";
+        $this->bd->setConsulta($sql, $parametros);
+        $r = "[ ";
+        while ($fila = $this->bd->getFila()) {
+            $objeto = new Sector();
+            $objeto->set($fila);
+            $r .= $objeto->getJSON() . ",";
+        }
+        $r = substr($r, 0, -1) . "]";
+        return $r;
+    }
+
+    function get($id) {
+        $condicion = "id = :id";
+        $parametros["id"] = $id;
+        $r = $this->getConsulta($condicion, $parametros);
+        if (sizeof($r) >= 1) {
+            return $r[0];
+        }
+        return null;
+    }
+
+    /**
+     * Devuelve la lista de usuarios Formateada en JSON pero paginado
+     * @param type $pagina
+     * @param type $rpp
+     * @param type $condicion
+     * @param type $parametros
+     * @param type $orderby
+     * @return string
+     */
     function getListJSON($pagina = 0, $rpp = 3, $condicion = "1=1", $parametros = array(), $orderby = "1") {
         $pos = $pagina * $rpp;
         $sql = "select * from "
                 . $this->tabla .
-                " where $condicion order by $orderby limit $pos, $rpp";
+                " where $condicion order by $orderby limit $pos, $rpp ";
+        $this->bd->setConsulta($sql, $parametros);
+        $r = "[ ";
+        while ($fila = $this->bd->getFila()) {
+            $objeto = new Sector();
+            $objeto->set($fila);
+            $r .= $objeto->getJSON() . ",";
+        }
+        $r = substr($r, 0, -1) . "]";
+        return $r;
+    }
+
+    /**
+     * Devuelve un String formateado a JSON hacelo mismo que getListJSON pero este tiene limite entre dos ids
+     * 
+     * @param type $condicion
+     * @param type $parametros
+     * @return string
+     */
+    function getListJSONLimit($id1 = 0, $id2 = 1, $condicion = "1=1", $parametros = array()) {
+        $sql = "select * from "
+                . $this->tabla .
+                " where $condicion limit $id1, $id2 ";
         $this->bd->setConsulta($sql, $parametros);
         $r = "[ ";
         while ($fila = $this->bd->getFila()) {

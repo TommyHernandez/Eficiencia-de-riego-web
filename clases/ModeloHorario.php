@@ -14,8 +14,22 @@ class ModeloHorario {
         $this->bd = $bd;
     }
 
+    function get($id) {
+        $sql = "SELECT * FROM $this->tabla where id=:id";
+        $param['id'] = $id;
+        $r = $this->bd->setConsulta($sql, $param);
+        if ($r) {
+            $objeto = new Horario();
+            $objeto->set($this->bd->getFila());
+            return $objeto;
+        }else{
+            return null;
+        }
+    }
+   
     function getJSON($id) {
-        return $this->get($id)->getJSON();
+        $objeto = $this->get($id);
+        return $objeto->getJSON();
     }
 
     function add(Horario $objeto) {
@@ -111,6 +125,38 @@ class ModeloHorario {
         $r = substr($r, 0, -1) . "]";
         return $r;
     }
+    
+      function getListJSONFull($condicion = "1=1", $parametros = array(), $orderby = "1") {
+        $pos = $pagina * $rpp;
+        $sql = "select * from "
+                . $this->tabla .
+                " where $condicion order by $orderby";
+        $this->bd->setConsulta($sql, $parametros);
+        $r = "[ ";
+        while ($fila = $this->bd->getFila()) {
+            $objeto = new Horario();
+            $objeto->set($fila);
+            $r .= $objeto->getJSON() . ",";
+        }
+        $r = substr($r, 0, -1) . "]";
+        return $r;
+    }
+
+
+    function getListJSON2($id1 = 0, $id2 = 6, $condicion = "1=1", $parametros = array(), $orderby = "1") {
+        $sql = "select * from "
+                . $this->tabla .
+                " where $condicion order by $orderby limit $id1, $id2";
+        $this->bd->setConsulta($sql, $parametros);
+        $r = "[ ";
+        while ($fila = $this->bd->getFila()) {
+            $objeto = new Horario();
+            $objeto->set($fila);
+            $r .= $objeto->getJSON() . ",";
+        }
+        $r = substr($r, 0, -1) . "]";
+        return $r;
+    }
 
     function getList($principio = 0, $rpp = 5, $condicion = "1=1", $orderby = 1, $parametros = array()) {
         $list = array();
@@ -131,7 +177,7 @@ class ModeloHorario {
     function count($parametros = array()) {
         $sql = "select count(*) from $this->tabla ";
         $r = $this->bd->setConsulta($sql, $parametros);
-       
+
         if ($r) {
             $f = $this->bd->getFila();
             return $f[0];
