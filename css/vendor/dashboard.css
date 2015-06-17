@@ -107,3 +107,7 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.cursord-dedo, .nav>li>a{
+  cursor: pointer !important;
+}

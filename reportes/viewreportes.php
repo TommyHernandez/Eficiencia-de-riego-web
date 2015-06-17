@@ -35,25 +35,27 @@ $enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->count(), 6, "viewr
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->          
+        <![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     </head>
     <body>
-        <?php include '../include/menu-sub.php';
-        ;
+        <?php include '../include/menu-sub.php';      
         ?>
 
         <div style="clear: both; height: 100px;"></div>
 <?php if ($resutl == 1) { ?>
             <script>
-                //mostramos la tostada en caso de que el borrado sea correcto
-                toastr.success('Have fun storming the castle!', 'Miracle Max Says');
-
+                $("document").ready(function(){
+                     //mostramos la tostada en caso de que el borrado sea correcto
+                toastr.success('Se ha eliminado Correctamente.', 'Resuelto');
+                });
             </script>
 <?php } else if ($resutl == -1) { ?>
             <script>
-                //Mostramos esta tostada en caso de que el borrado no sea correcto
-                toastr.error('I do not think that word means what you think it means.', 'Inconceivable!')
-
+                $('document').ready (function(){
+                    //Mostramos esta tostada en caso de que el borrado no sea correcto
+                toastr.error('No se ha podido eliminar.', '¡Error!');
+                });
             </script>
 <?php } ?>
         <div class="container container-fluid">
@@ -114,7 +116,7 @@ $enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->count(), 6, "viewr
     <!-- Bootstrap core JavaScript
 ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    
     <script src="../js/vendor/bootstrap.min.js"></script>
     <script src="../js/vendor/toastr.min.js"></script>
 

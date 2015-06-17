@@ -83,8 +83,8 @@ $usuario = $modelouser->get($objeto->getUsuario());
             </div>
             <?php if ($sesion->isAdminLogin()){ ?>
             <div class="row formulario-delete">
-                <form>
-                    <input type="hidden" name="id" value="<?php $objeto->getId(); ?>">
+                <form action="phpdelete.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $objeto->getId(); ?>">
                     <input type="submit" id="borrar" class="btn btn-warning" value="Eliminar el Reporte" />
                 </form>
             </div>

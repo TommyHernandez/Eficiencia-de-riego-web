@@ -50,15 +50,15 @@
                 <h4 class="modal-title">Añadir Sector</h4>
             </div>
             <!-- dialog body -->
-            <div class="modal-body">
+           <div class="modal-body">
                 <?php
-                include '../include/formulrioinsercionsector.php';
+                include '../include/formularioinsercionsector.php';
                 ?>
             </div>
             <!-- dialog buttons -->
             <div class="modal-footer">
-                <button type="button" id="btisi" class="btn btn-success">Enviar</button>
-                <button type="button" id="btino" class="btn btn-warning">Cancelar</button>
+                <button type="button" id="btisiSector" class="btn btn-success">Enviar</button>
+                <button type="button" id="btinoSector" class="btn btn-warning">Cancelar</button>
             </div>
         </div>
     </div>
@@ -74,13 +74,13 @@
             <!-- dialog body -->
             <div class="modal-body">
                 <?php
-                include '../include/formulrioinsercionhorario.php';
+                include '../include/formularioinsercionhorario.php';
                 ?>
             </div>
             <!-- dialog buttons -->
             <div class="modal-footer">
-                <button type="button" id="btisi" class="btn btn-success">Enviar</button>
-                <button type="button" id="btino" class="btn btn-warning">Cancelar</button>
+                <button type="button" id="btisiHorario" class="btn btn-success">Enviar</button>
+                <button type="button" id="btinoHorario" class="btn btn-warning">Cancelar</button>
             </div>
         </div>
     </div>

@@ -10,8 +10,7 @@ class Sector {
     private $id, $olivos, $contador, $nombre, $metodo;
 
     function __construct($id = 0, $olivos = 0, $contador = "", $nombre = "", $metodo = "") {
-        $this->id = $id;
-       
+        $this->id = $id;       
         $this->olivos = $olivos;
         $this->contador = $contador;
         $this->nombre = $nombre;

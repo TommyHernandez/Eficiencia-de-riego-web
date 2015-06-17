@@ -53,7 +53,7 @@ class ServidorRF {
                 $modelo = new ModeloUsuario($bd);
                 $r = $modelo->getListJSON();
                 break;
-            case "sector":
+            case "sectores":
                 $modelo = new ModeloSector($bd);
                 if ($this->id1 == null && $this->id2 == null) {
                     $r = $modelo->getListJSONFull();
@@ -73,8 +73,7 @@ class ServidorRF {
                 $modelo = new ModeloHorario($bd);                
                 if ($this->id1 != null && $this->id2 == "") {
                     $r = $modelo->getJSON($this->id1);                    
-                } else if ($this->id1 == null && $this->id2 == null) {
-                    
+                } else if ($this->id1 == null && $this->id2 == null) {                    
                     $r = $modelo->getListJSONFull();
                 } else if ($this->id1 != null && $this->id2 != null) {
                     $r = $modelo->getJSON2($this->id1, $this->id2);

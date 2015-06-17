@@ -64,18 +64,19 @@ function confirmar(evento, mensaje) {
     function agregarEventoVerInsertar() {
         var elemento = document.getElementById("addbtnsectores");
         elemento.addEventListener("click", function () {
-            $("#btisi").unbind("click");
-            $("#btisi").on("click", function () {
+            $("#btisiSector").unbind("click");
+            $("#btisiSector").on("click", function () {
                 //Capturamos todos los elementos del DOM
-                var login = document.getElementById('login').value;
-                var clave = document.getElementById('clave').value;
-                var nombre = document.getElementById('nombre').value;
-                var email = document.getElementById('email').value;
-                 var root = $("#isroot").val();
-                var cadena ;
+                var id= $('#idsec').val();
+                var olivos = $('#olivos').val();
+                var contador = $('#contador').val();             
+               var nombre = $("#nsec").val();
+                var riego = $('#riego').val();
+                var cadena = "id="+id+"&olivos="+olivos+"&contador="+contador+"&nombre="+nombre+"&riego="+riego;
+               
                 // LLamada AJAX para la insercion
                 $.ajax({
-                    url: "ajaxSectorinsert.php?" + cadena,
+                    url: "ajaxSectorInsert.php?" + cadena,
                     success: function (result) {
                         if (result.estado) {
                             tostada("Se ha añadido correctametne");
@@ -90,8 +91,8 @@ function confirmar(evento, mensaje) {
 
                 $("#dialogomodalinsertarS").modal('hide');
             });
-            $("#btino").unbind("click");
-            $("#btino").on("click", function (e) {
+            $("#btinoSector").unbind("click");
+            $("#btinoSector").on("click", function (e) {
                 //usando la tostada para dar un aviso
                 tostada("Cacelando!", 2);
                 $("#dialogomodalinsertarS").modal('hide');
@@ -187,7 +188,7 @@ function confirmar(evento, mensaje) {
 //            tr.appendChild(td);
 
             td = document.createElement("td");
-            td.innerHTML = "<a  class='enlace_borrar' data-borrar='" + datos.usuarios[i].id + "'>BORRAR</a>";
+            td.innerHTML = "<a  class='enlace_borrar cursord-dedo' data-borrar='" + datos.usuarios[i].id + "'>BORRAR</a>";
             tr.appendChild(td);
 
             tabla.appendChild(tr);
@@ -196,20 +197,20 @@ function confirmar(evento, mensaje) {
         tr = document.createElement("tr");
         td = document.createElement("th");
         td.setAttribute("colspan", 10);
-        td.innerHTML += "<a class='enlace' data-href='" + datos.paginas.inicio + "'>&lt;&lt;</a> ";
-        td.innerHTML += "<a class='enlace' data-href='" + datos.paginas.anterior + "'>&lt;</a> ";
+        td.innerHTML += "<a class='enlace cursord-dedo' data-href='" + datos.paginas.inicio + "'>&lt;&lt;</a> ";
+        td.innerHTML += "<a class='enlace cursord-dedo' data-href='" + datos.paginas.anterior + "'>&lt;</a> ";
         if (datos.paginas.primero !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.primero + "'>" + (parseInt(datos.paginas.primero) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.primero + "'>" + (parseInt(datos.paginas.primero) + 1) + "</a> ";
         if (datos.paginas.segundo !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.segundo + "'>" + (parseInt(datos.paginas.segundo) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.segundo + "'>" + (parseInt(datos.paginas.segundo) + 1) + "</a> ";
         if (datos.paginas.actual !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.actual + "'>" + (parseInt(datos.paginas.actual) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.actual + "'>" + (parseInt(datos.paginas.actual) + 1) + "</a> ";
         if (datos.paginas.cuarto !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.cuarto + "'>" + (parseInt(datos.paginas.cuarto) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlacecursord-dedo' data-href='" + datos.paginas.cuarto + "'>" + (parseInt(datos.paginas.cuarto) + 1) + "</a> ";
         if (datos.paginas.quinto !== -1)
             td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.quinto + "'>" + (parseInt(datos.paginas.quinto) + 1) + "</a> ";
-        td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.siguiente + "'>&gt;</a> ";
-        td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.ultimo + "'>&gt;&gt;</a> ";
+        td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.siguiente + "'>&gt;</a> ";
+        td.innerHTML += "<a  class='enlacecursord-dedo' data-href='" + datos.paginas.ultimo + "'>&gt;&gt;</a> ";
         tr.appendChild(td);
         tabla.appendChild(tr);
 

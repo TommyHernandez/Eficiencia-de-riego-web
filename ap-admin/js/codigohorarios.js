@@ -29,7 +29,7 @@ window.addEventListener("load", function () {
         //ahora mediante Jquery capturamos  los botone sy le damos funcion
         $("#btsi").unbind("click"); //eliminamos el escuchador click
         $("#btsi").on("click", function () {
-            $("#dialogomodal").modal('hide');
+            $("#dialogomodal").modal('hide');            
             //realizamos una peticion AJAX
             $.ajax({
                 url: "ajaxDeleteHorario.php?id=" + mensaje + "&pagina=" + pagina,
@@ -68,19 +68,15 @@ window.addEventListener("load", function () {
     function agregarEventoVerInsertar() {
         var elemento = document.getElementById("addbtnhorarioss");
         elemento.addEventListener("click", function () {
-            $("#btisi").unbind("click");
-            $("#btisi").on("click", function () {
+            $("#btisiHorario").unbind("click");
+            $("#btisiHorario").on("click", function () {
                 //Capturamos todos los elementos del DOM
-                var login = document.getElementById('login').value;
-                var clave = document.getElementById('clave').value;
-                var nombre = document.getElementById('nombre').value;
-                var email = document.getElementById('email').value;
-                 var root = $("#isroot").val();
-                var cadena = "login=" + login + "&clave=" + clave + "&email=" + email + "&nombre=" + nombre + "&root="+root;
-
+                var dia = $("#dia").val();
+                var sector = $('#sector').val();
+                var cadena = "sector="+sector+"&dia="+dia;
                 // LLamada AJAX para la insercion
                 $.ajax({
-                    url: "ajaxinsert.php?" + cadena,
+                    url: "ajaxInsertHorario.php?" + cadena,
                     success: function (result) {
                         if (result.estado) {
                             tostada("Se ha Añadido correctametne");
@@ -89,76 +85,20 @@ window.addEventListener("load", function () {
                         }
                     },
                     error: function () {
-                        tostada("AJAX FALLO", 3);
+                        tostada("Error interno de AJAX", 3);
                     }
                 });
 
                 $("#dialogomodalinsertarH").modal('hide');
             });
-            $("#btino").unbind("click");
-            $("#btino").on("click", function (e) {
+            $("#btinoHorario").unbind("click");
+            $("#btinoHorario").on("click", function (e) {
                 //usando la tostada para dar un aviso
                 tostada("Cacelando!", 2);
                 $("#dialogomodalinsertarH").modal('hide');
             });
             $('#dialogomodalinsertarH').modal('show');
         }, false);
-    }
-    /**
-     *
-     * @returns {undefined}
-     */
-    function verEditar() {
-        //Capturamos todos los elementos del DOM
-        var id = this.getAttribute('data-editar');
-        // LLamada AJAX para la insercion
-        $.ajax({
-            url: "ajaxget.php?id=" + id,
-            success: function (result) {
-                var login = document.getElementById('login').value = result.login;
-                var clave = document.getElementById('clave').value = "";
-                var nombre = document.getElementById('nombre').value = result.nombre;
-                var email = document.getElementById('email').value = result.email;
-
-            },
-            error: function () {
-                tostada("AJAX FALLO al procesar al usuario", 3);
-            }
-        });
-        /* ==== BOTON SI EN CASO DE QUE SE QUIERA EDITAR ====*/
-        $("#btisi").unbind("click");
-        $("#btisi").on("click", function () {
-            //Capturamos todos los elementos del DOM
-            var loginnew = document.getElementById('login').value;
-            var clave = document.getElementById('clave').value;
-            var nombre = document.getElementById('nombre').value;
-            var email = document.getElementById('email').value;
-            var root = $("#isroot").val();
-            var cadena = "login=" + loginnew + "&clave=" + clave + "&nombre=" + nombre + "&email=" + email + "&isroot="+root+"&id=" + id;
-            // LLamada AJAX para la edicion
-            $.ajax({
-                url: "ajaxedit.php?" + cadena,
-                success: function (result) {
-                    if (result.estado) {
-                        tostada("Se ha Editado Correctametne");
-                    } else {
-                        tostada("No se ha podido insertar", 3);
-                    }
-                },
-                error: function () {
-                    tostada("AJAX FALLO", 3);
-                }
-            });
-            $("#dialogomodalinsertar").modal('hide');
-        });
-        $("#btino").unbind("click");
-        $("#btino").on("click", function (e) {
-            //usando la tostada para dar un aviso
-            tostada("Cacelando!", 2);
-            $("#dialogomodalinsertar").modal('hide');
-        });
-        $('#dialogomodalinsertar').modal('show');
-
     }
 
     function destruirTabla() {
@@ -248,7 +188,7 @@ window.addEventListener("load", function () {
 //            tr.appendChild(td);
 
             td = document.createElement("td");
-            td.innerHTML = "<a  class='enlace_borrar' data-borrar='" + datos.usuarios[i].id + "'>BORRAR</a>";
+            td.innerHTML = "<a  class='enlace_borrar cursord-dedo' data-borrar='" + datos.usuarios[i].id + "'>BORRAR</a>";
             tr.appendChild(td);
 
             tabla.appendChild(tr);
@@ -257,20 +197,20 @@ window.addEventListener("load", function () {
         tr = document.createElement("tr");
         td = document.createElement("th");
         td.setAttribute("colspan", 10);
-        td.innerHTML += "<a class='enlace' data-href='" + datos.paginas.inicio + "'>&lt;&lt;</a> ";
-        td.innerHTML += "<a class='enlace' data-href='" + datos.paginas.anterior + "'>&lt;</a> ";
+        td.innerHTML += "<a class='enlace cursord-dedo' data-href='" + datos.paginas.inicio + "'>&lt;&lt;</a> ";
+        td.innerHTML += "<a class='enlace cursord-dedo' data-href='" + datos.paginas.anterior + "'>&lt;</a> ";
         if (datos.paginas.primero !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.primero + "'>" + (parseInt(datos.paginas.primero) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.primero + "'>" + (parseInt(datos.paginas.primero) + 1) + "</a> ";
         if (datos.paginas.segundo !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.segundo + "'>" + (parseInt(datos.paginas.segundo) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.segundo + "'>" + (parseInt(datos.paginas.segundo) + 1) + "</a> ";
         if (datos.paginas.actual !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.actual + "'>" + (parseInt(datos.paginas.actual) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.actual + "'>" + (parseInt(datos.paginas.actual) + 1) + "</a> ";
         if (datos.paginas.cuarto !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.cuarto + "'>" + (parseInt(datos.paginas.cuarto) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.cuarto + "'>" + (parseInt(datos.paginas.cuarto) + 1) + "</a> ";
         if (datos.paginas.quinto !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.quinto + "'>" + (parseInt(datos.paginas.quinto) + 1) + "</a> ";
-        td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.siguiente + "'>&gt;</a> ";
-        td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.ultimo + "'>&gt;&gt;</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.quinto + "'>" + (parseInt(datos.paginas.quinto) + 1) + "</a> ";
+        td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.siguiente + "'>&gt;</a> ";
+        td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.ultimo + "'>&gt;&gt;</a> ";
         tr.appendChild(td);
         tabla.appendChild(tr);
 
@@ -278,7 +218,7 @@ window.addEventListener("load", function () {
         var div = document.getElementById("divajax");
         div.appendChild(tabla);
         definirBorrar("enlace_borrar");
-        definirEditar("enlace_editar");
+        //definirEditar("enlace_editar");
     }
 
     $("#lstbtnhorarios").on("click", function () {

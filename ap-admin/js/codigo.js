@@ -248,7 +248,7 @@ window.addEventListener("load", function () {
 //            tr.appendChild(td);
 
             td = document.createElement("td");
-            td.innerHTML = "<a  class='enlace_borrar' data-borrar='" + datos.usuarios[i].id + "'>BORRAR</a>";
+            td.innerHTML = "<a  class='enlace_borrar cursord-dedo' data-borrar='" + datos.usuarios[i].id + "'>BORRAR</a>";
             tr.appendChild(td);
 
             tabla.appendChild(tr);
@@ -257,20 +257,20 @@ window.addEventListener("load", function () {
         tr = document.createElement("tr");
         td = document.createElement("th");
         td.setAttribute("colspan", 10);
-        td.innerHTML += "<a class='enlace' data-href='" + datos.paginas.inicio + "'>&lt;&lt;</a> ";
-        td.innerHTML += "<a class='enlace' data-href='" + datos.paginas.anterior + "'>&lt;</a> ";
+        td.innerHTML += "<a class='enlace cursord-dedo' data-href='" + datos.paginas.inicio + "'>&lt;&lt;</a> ";
+        td.innerHTML += "<a class='enlace cursord-dedo' data-href='" + datos.paginas.anterior + "'>&lt;</a> ";
         if (datos.paginas.primero !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.primero + "'>" + (parseInt(datos.paginas.primero) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.primero + "'>" + (parseInt(datos.paginas.primero) + 1) + "</a> ";
         if (datos.paginas.segundo !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.segundo + "'>" + (parseInt(datos.paginas.segundo) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.segundo + "'>" + (parseInt(datos.paginas.segundo) + 1) + "</a> ";
         if (datos.paginas.actual !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.actual + "'>" + (parseInt(datos.paginas.actual) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.actual + "'>" + (parseInt(datos.paginas.actual) + 1) + "</a> ";
         if (datos.paginas.cuarto !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.cuarto + "'>" + (parseInt(datos.paginas.cuarto) + 1) + "</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.cuarto + "'>" + (parseInt(datos.paginas.cuarto) + 1) + "</a> ";
         if (datos.paginas.quinto !== -1)
-            td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.quinto + "'>" + (parseInt(datos.paginas.quinto) + 1) + "</a> ";
-        td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.siguiente + "'>&gt;</a> ";
-        td.innerHTML += "<a  class='enlace' data-href='" + datos.paginas.ultimo + "'>&gt;&gt;</a> ";
+            td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.quinto + "'>" + (parseInt(datos.paginas.quinto) + 1) + "</a> ";
+        td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.siguiente + "'>&gt;</a> ";
+        td.innerHTML += "<a  class='enlace cursord-dedo' data-href='" + datos.paginas.ultimo + "'>&gt;&gt;</a> ";
         tr.appendChild(td);
         tabla.appendChild(tr);
 
@@ -278,7 +278,7 @@ window.addEventListener("load", function () {
         var div = document.getElementById("divajax");
         div.appendChild(tabla);
         definirBorrar("enlace_borrar");
-        definirEditar("enlace_editar");
+       // definirEditar("enlace_editar");
     }
 
     $("#lstbtnusers").on("click", function () {

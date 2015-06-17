@@ -30,7 +30,7 @@ require './require/comun.php';
         <!-- librerias de google -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script src="js/vendor/epoch.min.js"></script>
+        <script src="js/vendor/chart.js"></script>
         <!-- toastadas -->
         <link type="text/css" rel="stylesheet" href="css/vendor/toastr.min.css" />
         <script src="js/vendor/toastr.min.js"></script>
@@ -197,7 +197,7 @@ require './require/comun.php';
                             <h2></h2>
                         </div>
                         <div class="col-md-8">
-                            <div id="litros" ></div>
+                           <canvas id="litros" width="400" height="400"></canvas>
                         </div>
                         <div class="col-md-4">
 

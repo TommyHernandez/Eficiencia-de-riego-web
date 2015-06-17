@@ -111,3 +111,6 @@ h5 {
 .formulario-delete form{
     right: 0px;
 }
+.cursord-dedo{
+  cursor: pointer !important;
+}

@@ -34,9 +34,9 @@ class ModeloHorario {
 
     function add(Horario $objeto) {
         $sql = "insert into " . $this->tabla . " values( null, :sector, :dia, :regado)";
-        $parametros["dia"] = $objeto->getLogin();
-        $parametros["sector"] = sha1($objeto->getClave());
-        $parametros["regado"] = $objeto->getNombre();
+        $parametros["dia"] = $objeto->getDia();
+        $parametros["sector"] = $objeto->getSector();
+        $parametros["regado"] = $objeto->getRegado();
         $r = $this->bd->setConsulta($sql, $parametros);
         if (!$r) {
             return -1;

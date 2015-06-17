@@ -27,9 +27,6 @@ class ModeloSector {
         $parametros["nombre"] = $objeto->getNombre();
         $parametros["metodo"] = $objeto->getMetodo();
         $r = $this->bd->setConsulta($sql, $parametros);
-        if (!$r) {
-            return -1;
-        }
         return $r;
     }
 

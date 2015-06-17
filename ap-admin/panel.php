@@ -12,7 +12,6 @@ $sesion->administrador("../index.php");
         <meta name="description" content="Pagina web para la eficiencia de riego">
         <meta name="author" content="Pedro hernandez">
         <link rel="icon" href="../imagenes/favicon.png">
-
         <title>Admin-Panel</title>
         <!-- Bootstrap core CSS -->
         <link href="../css/vendor/bootstrap.min.css" rel="stylesheet">
@@ -59,7 +58,7 @@ $sesion->administrador("../index.php");
                     <ul class="nav nav-sidebar">
                         <li class="active"><a href="#">Bienvenido</a></li>
                         <li>
-                            <a class="" type="button" data-toggle="collapse" data-target="#li-usuarios" aria-expanded="false" aria-controls="li-usuarios">
+                            <a class="cursord-dedo" type="button" data-toggle="collapse" data-target="#li-usuarios" aria-expanded="false" aria-controls="li-usuarios">
                                 Usuarios
                             </a>
                             <div class="collapse" id="li-usuarios">
@@ -73,7 +72,7 @@ $sesion->administrador("../index.php");
 
                         </li>
                         <li>
-                            <a class="" type="button" data-toggle="collapse" data-target="#li-sectores" aria-expanded="false" aria-controls="li-sectores">
+                            <a class="cursord-dedo" type="button" data-toggle="collapse" data-target="#li-sectores" aria-expanded="false" aria-controls="li-sectores">
                                 Sectores
                             </a>
                             <div class="collapse" id="li-sectores">
@@ -87,7 +86,7 @@ $sesion->administrador("../index.php");
 
                         </li>
                           <li>
-                            <a class="" type="button" data-toggle="collapse" data-target="#li-horarios" aria-expanded="false" aria-controls="li-horarios">
+                            <a class="cursord-dedo" type="button" data-toggle="collapse" data-target="#li-horarios" aria-expanded="false" aria-controls="li-horarios">
                                 Horarios
                             </a>
                             <div class="collapse" id="li-horarios">

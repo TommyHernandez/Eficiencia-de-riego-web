@@ -114,27 +114,43 @@ function barrasLaterales(param) {
 
 }
 function epochbarras() {
+    var ctx = document.getElementById("litros").getContext("2d");
     var param ="tabla=lecturas&litros=true";
-    var datos = [];
+  var data = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+        {
+            label: "My First dataset",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.8)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [65, 59, 80, 81, 56, 55, 40]
+        },
+        {
+            label: "My Second dataset",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: [28, 48, 40, 19, 86, 27, 90]
+        }
+    ]
+};
     $.ajax({
         url: "ajaxselect.php?" + param,
         success: function (result) {
             
-            for (var prop in result) {
-                var a = "'" + prop + "'";
-                var b = parseFloat(result[prop]);
-
-                datos.push( { x: a, y: b });
-            }
-            $('#litros').epoch({
-                type: 'bar',
-                data: datos
-            });
+      
         },
         error: function () {
             tostada("Ha fallado ", 3);
         }
     });
+    var options = {
+        responsive:true
+    };
+    var myBarChart = new Chart(ctx).Bar(data,options);
 }
 /*=== DIALOGOS  ===*/
 function tostada(mensaje, tipo) {
