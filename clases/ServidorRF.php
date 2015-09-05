@@ -2,6 +2,9 @@
 
 /**
  * Clase servidor Restfull
+ * Para poder entender bien esta clase hay que tener en cuenta el funcionamiento de los modelos y los objetos.
+ *  Se crean objetos por cada una de las tablas y por cada tabla tambien existe un modelo que nos facilita el trabajo directo con la base de datos.
+ * 
  *
  * @author Pedro T Hernandez <pedrothdc@pixelariumstudio.es>
  */
@@ -19,8 +22,9 @@ class ServidorRF {
     }
 
     /**
+     * Procesa el tipo de peticion recivida leyendo el metodo por el que llega para conocer que es lo que se desea hacer. 
      * 
-     * @return type
+     * 
      */
     function procesar() {
         if ($this->tipo == "GET") {
@@ -37,8 +41,8 @@ class ServidorRF {
     }
 
     /**
-     * 
-     * @return string
+     * Se ejecuta al llevar la peticon por metodo GET sirve para mostrar el contenido que tiene la base de datos
+     * @return string JSON
      */
     function listar() {
         
@@ -90,8 +94,8 @@ class ServidorRF {
     }
 
     /**
-     * 
-     * @return string
+     * Ejecuta este metodo cuando es un metodo POST que crea contenido (o añade contenido) a la base de datos
+     * @return string JSON
      */
     function crear() {
         $bd = new BaseDatos();
@@ -114,7 +118,6 @@ class ServidorRF {
                     $isRoot = $this->json->isroot;
                     $r = $objeto = new Usuario(null, $login, $this->json->clave, $this->json->email, $this->json->nombre, $isRoot);
                     $modelo->add($objeto);
-                    //return '{"estado":"te sabes el chiste ese del switch que no estaba programado, pues esto es lo mismo"}';
                     break;
                 case "reportes":
                     $modelo = new ModeloReportes($bd);
@@ -140,7 +143,10 @@ class ServidorRF {
     }
 
     /**
+     * Se ejecuta al recivir una peticion put para actualizar los datos.
+     * El funcionamiento es obvio, en este caso no está terminado por que no se contemplo
      * 
+     * @return String JSON
      */
     function modificar() {
         $bd = new BaseDatos();
@@ -162,16 +168,20 @@ class ServidorRF {
     }
 
     /**
+     * Metodo que la ejecuta DELETE borra informacion de la base de datos, en esta caso tambien se implementa un pequelo sitema de seguridad
+     * para evitar que cualquiera borre del servidor se incorpora una palabra clave encriptada, dicha palabra llegara como objeto JSON
      * 
+     * @return String JSON
      */
     function borrar() {
         $bd = new BaseDatos();
+        $apiKey = md5("pixel");
         if ($this->id1 != null && $this->json != null) {
             $this->json = json_decode($this->json);
-            if ($this->tabla == "reportes" && $this->json->apikey == md5("pixel")) {
+            if ($this->tabla == "reportes" && $this->json->apikey == $apiKey) {
                 $modelo = new ModeloReportes($bd);
                 $r = $modelo->delete($this->id1);
-            } else if ($this->tabla == "lecturas" && $this->json->apikey == md5("pixel")) {
+            } else if ($this->tabla == "lecturas" && $this->json->apikey == $apiKey) {
                 $modelo = new ModeloLectura($bd);
                 $modelo->delete($id);
             }
